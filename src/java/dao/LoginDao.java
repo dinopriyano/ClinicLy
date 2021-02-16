@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import model.UserModel;
 
 /**
  *
@@ -20,36 +21,40 @@ public class LoginDao {
     private final Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
-    private SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
 
     public LoginDao() {
         this.conn = CliniclyConnection.connection();
     }
     
-    public String loginUser(String email,String pass){
-        String status = null;
+    public UserModel loginUser(String email,String pass){
+        UserModel model = new UserModel();
         try{
-            String query="SELECT * FROM user WHERE email = ? AND password = ?";
-            ps=conn.prepareStatement(query);
+            String query="{CALL LoginUser(?,?)}";
+            ps=conn.prepareCall(query);
             ps.setString(1, email);
             ps.setString(2, pass);
             rs=ps.executeQuery();
             if(rs.next()){
-                status = "Login berhasil";
+                model.setEmail(rs.getString("email"));
+                model.setIdRole(rs.getString("id_role"));
+                model.setIdUser(rs.getString("id_user"));
+                model.setNameRole(rs.getString("des_role"));
             }
             else{
-                status = "Login gagal! Cek email dan password";
+                System.out.println("Terjadi kesalahan!");
             }
         }
         catch(Exception e){
-            status = "Terjadi error";
+            System.out.println(e);
         }
-        return status;
+        return model;
     }
+    
+    
     
     public static void main(String[] args) {
         LoginDao dao = new LoginDao();
-        System.out.println(dao.loginUser("jono@email.com","passw"));
+        System.out.println(dao.loginUser("jono@email.com","passs"));
     }
     
 }

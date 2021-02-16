@@ -5,17 +5,17 @@
  */
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
  * @author dinop
  */
 public class PembelianObatModel {
-    String idTransaksi,idSupplier,namaSupplier,noFaktur,tglFaktur,idObat,namaObat,keterangan,idUser;
+    String idTransaksi,idSupplier,namaSupplier,noFaktur,idObat,namaObat,keterangan,idUser;
     Boolean dipisahkan;
     double hargaBeli,jumlah,jumlahTerjual;
-    Date tglExpired,waktu;
+    Date tglExpired,waktu,tglFaktur;
 
     public void setIdTransaksi(String idTransaksi) {
         this.idTransaksi = idTransaksi;
@@ -29,12 +29,12 @@ public class PembelianObatModel {
         this.namaSupplier = namaSupplier;
     }
 
-    public void setNoFaktur(String noFaktur) {
-        this.noFaktur = noFaktur;
+    public void setTglFaktur(Date tglFaktur) {
+        this.tglFaktur = tglFaktur;
     }
 
-    public void setTglFaktur(String tglFaktur) {
-        this.tglFaktur = tglFaktur;
+    public void setNoFaktur(String noFaktur) {
+        this.noFaktur = noFaktur;
     }
 
     public void setIdObat(String idObat) {
@@ -77,7 +77,9 @@ public class PembelianObatModel {
         this.waktu = waktu;
     }
 
-    
+    public Date getTglFaktur() {
+        return tglFaktur;
+    }
 
     public String getIdTransaksi() {
         return idTransaksi;
@@ -93,10 +95,6 @@ public class PembelianObatModel {
 
     public String getNoFaktur() {
         return noFaktur;
-    }
-
-    public String getTglFaktur() {
-        return tglFaktur;
     }
 
     public String getIdObat() {
