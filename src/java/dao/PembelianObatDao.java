@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Date;
 import model.PembelianObatModel;
+import static utils.Encryption.encryptSHA256;
 
 /**
  *
@@ -132,24 +133,26 @@ public class PembelianObatDao {
     }
     
     public static void main(String[] args) {
-        PembelianObatDao dao = new PembelianObatDao();
-        long millis=System.currentTimeMillis();  
-        Date date = new Date(millis);
-        PembelianObatModel model = new PembelianObatModel();
-        model.setIdSupplier("SU0001");
-        model.setTglFaktur(date);
-        model.setIdObat("OB000001");
-        model.setHargaBeli(18000);
-        model.setJumlah(40);
-        model.setKeterangan("Untuk batuk bro");
-        model.setTglExpired(date);
-        model.setJumlahTerjual(20);
-//        model.setIdUser("US0001");
-//        model.setWaktu(date);
-        model.setDipisahkan(false);
-        model.setIdTransaksi("TROB00012");
-        model.setNoFaktur("FAK00004");
-        dao.save(model, "update");
+//        PembelianObatDao dao = new PembelianObatDao();
+//        long millis=System.currentTimeMillis();  
+//        Date date = new Date(millis);
+//        PembelianObatModel model = new PembelianObatModel();
+//        model.setIdSupplier("SU0001");
+//        model.setTglFaktur(date);
+//        model.setIdObat("OB000001");
+//        model.setHargaBeli(18000);
+//        model.setJumlah(40);
+//        model.setKeterangan("Untuk batuk bro");
+//        model.setTglExpired(date);
+//        model.setJumlahTerjual(20);
+////        model.setIdUser("US0001");
+////        model.setWaktu(date);
+//        model.setDipisahkan(false);
+//        model.setIdTransaksi("TROB00012");
+//        model.setNoFaktur("FAK00004");
+//        dao.save(model, "update");
+
+        System.out.println(encryptSHA256("pass"));
     }
     
 }
