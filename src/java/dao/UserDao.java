@@ -5,10 +5,40 @@
  */
 package dao;
 
+import connection.CliniclyConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author dinop
  */
 public class UserDao {
+    private final Connection conn;
+    private PreparedStatement ps;
+    private ResultSet rs;
+
+    public UserDao() {
+        this.conn = CliniclyConnection.connection();
+    }
     
+    public void disableUser(String userID){
+        try{
+            String lastID = null;
+            String query="{CALL DisableUser(?)}";
+            ps=conn.prepareCall(query);
+            ps.setString(1, userID);
+            rs=ps.executeQuery();
+            System.out.println("Success disable user");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public static void main(String[] args) {
+        UserDao dao = new UserDao();
+        dao.disableUser("US0003");
+    }
 }
