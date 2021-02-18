@@ -37,8 +37,22 @@ public class UserDao {
         }
     }
     
+    public void enableUser(String userID){
+        try{
+            String lastID = null;
+            String query="{CALL EnableUser(?)}";
+            ps=conn.prepareCall(query);
+            ps.setString(1, userID);
+            rs=ps.executeQuery();
+            System.out.println("Success enable user");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
     public static void main(String[] args) {
         UserDao dao = new UserDao();
-        dao.disableUser("US0003");
+        dao.enableUser("US0003");
     }
 }
