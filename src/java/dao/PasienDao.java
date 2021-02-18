@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import model.PasienModel;
 import static utils.Encryption.encryptSHA256;
 
@@ -130,6 +132,41 @@ public class PasienDao {
         }
     }
     
+    public ArrayList<PasienModel> getAllPasien(){
+        ArrayList<PasienModel> arrModel = new ArrayList<PasienModel>();
+        try{
+            String lastID = null;
+            String query="{CALL GetAllPasien()}";
+            ps=conn.prepareCall(query);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                PasienModel model = new PasienModel();
+                model.setId_pasien(rs.getString("id_pasien"));
+                model.setNama_pasien(rs.getString("nama_pasien"));
+                model.setTgl_lahir(rs.getDate("tgl_lahir"));
+                model.setJenis_kelamin(rs.getString("jenis_kelamin"));
+                model.setNo_ktp(rs.getString("no_ktp"));
+                model.setAlamat(rs.getString("alamat"));
+                model.setNo_hp(rs.getString("no_hp"));
+                model.setGol_darah(rs.getString("gol_darah"));
+                model.setUser_id(rs.getString("user_id"));
+                model.setCreated_user_id(rs.getString("created_user_id"));
+                model.setCreated_date(rs.getDate("created_date"));
+                model.setEmail(rs.getString("email"));
+                model.setPassword(rs.getString("password"));
+                model.setId_role(rs.getString("id_role"));
+                model.setStatus(rs.getBoolean("status"));
+                model.setDes_role(rs.getString("des_role"));
+                arrModel.add(model);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return arrModel;
+    }
+    
     public static void main(String[] args) {
         long millis=System.currentTimeMillis();  
         Date date = new Date(millis);
@@ -152,6 +189,8 @@ public class PasienDao {
         model.setCreated_date(date);
         model.setCreated_user_id("US0001");
         dao.save(model, "insert");
+
+//        System.out.println(dao.getAllPasien().get(0).getEmail());
         
     }
     
