@@ -5,7 +5,7 @@
  */
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -13,47 +13,63 @@ import java.util.Date;
  */
 public class ObatModel {
     String idObat,namaObat,satuan,userId;
-    int stok;
-    double hargaJual;
+    double stok,hargaJual;
     Date waktu;
-
-    public ObatModel(String idObat, String namaObat, String satuan, String userId, int stok, double hargaJual, Date waktu) {
-        this.idObat = idObat;
-        this.namaObat = namaObat;
-        this.satuan = satuan;
-        this.userId = userId;
-        this.stok = stok;
-        this.hargaJual = hargaJual;
-        this.waktu = waktu;
-    }
 
     public String getIdObat() {
         return idObat;
+    }
+
+    public void setIdObat(String idObat) {
+        this.idObat = idObat;
     }
 
     public String getNamaObat() {
         return namaObat;
     }
 
+    public void setNamaObat(String namaObat) {
+        this.namaObat = namaObat;
+    }
+
     public String getSatuan() {
         return satuan;
+    }
+
+    public void setSatuan(String satuan) {
+        this.satuan = satuan;
     }
 
     public String getUserId() {
         return userId;
     }
 
-    public int getStok() {
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public double getStok() {
         return stok;
+    }
+
+    public void setStok(double stok) {
+        this.stok = stok;
     }
 
     public double getHargaJual() {
         return hargaJual;
     }
 
+    public void setHargaJual(double hargaJual) {
+        this.hargaJual = hargaJual;
+    }
+
     public Date getWaktu() {
         return waktu;
     }
-    
+
+    public void setWaktu(Date waktu) {
+        this.waktu = waktu;
+    }
     
 }
