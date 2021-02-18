@@ -5,10 +5,155 @@
  */
 package dao;
 
+import connection.CliniclyConnection;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import model.PasienModel;
+import static utils.Encryption.encryptSHA256;
+
 /**
  *
  * @author dinop
  */
 public class PasienDao {
+    private final Connection conn;
+    private PreparedStatement ps;
+    private ResultSet rs;
+
+    public PasienDao() {
+        this.conn = CliniclyConnection.connection();
+    }
+    
+    public String getNewIdUser(){
+        String newID = null;
+        try{
+            String lastID = null;
+            String query="{CALL GetLastIdUser()}";
+            ps=conn.prepareCall(query);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                lastID = rs.getString("id_user");
+                String lastNumStr = lastID.substring(2);
+                int newNumInt = Integer.parseInt(lastNumStr)+1;
+                String newNumStr = "000"+newNumInt;
+                String fixNewNumStr = newNumStr.substring(newNumStr.length()-4);
+                newID = "US"+fixNewNumStr;
+            }
+            else{
+                newID = "US0001";
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return newID;
+        
+    }
+    
+    public String getNewIdPasien(){
+        String newID = null;
+        try{
+            String lastID = null;
+            String query="{CALL GetLastIdPasien()}";
+            ps=conn.prepareCall(query);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                lastID = rs.getString("id_pasien");
+                String lastNumStr = lastID.substring(2);
+                int newNumInt = Integer.parseInt(lastNumStr)+1;
+                String newNumStr = "000"+newNumInt;
+                String fixNewNumStr = newNumStr.substring(newNumStr.length()-4);
+                newID = "PS"+fixNewNumStr;
+            }
+            else{
+                newID = "PS0001";
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return newID;
+        
+    }
+    
+    public void save(PasienModel model,String page){
+        try{
+            String query = null;
+            if(page.equals("insert")){
+                query="{CALL InsertPasien(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+                ps=conn.prepareCall(query);
+                ps.setString(1, model.getEmail());
+                ps.setString(2, model.getId_role());
+                ps.setString(3, model.getUser_id());
+                ps.setString(4, model.getPassword());
+                ps.setBoolean(5, model.isStatus());
+                ps.setString(6, model.getId_pasien());
+                ps.setString(7, model.getNama_pasien());
+                ps.setDate(8, model.getTgl_lahir());
+                ps.setString(9, model.getJenis_kelamin());
+                ps.setString(10, model.getNo_ktp());
+                ps.setString(11, model.getAlamat());
+                ps.setString(12, model.getNo_hp());
+                ps.setString(13, model.getGol_darah());
+                ps.setString(14, model.getCreated_user_id());
+                ps.setDate(15, model.getCreated_date());
+                ps.executeUpdate();
+                System.out.println("Data inserted!");
+            }
+            else if(page.equals("update")){
+                query="{CALL UpdatePasien(?,?,?,?,?,?,?,?,?,?,?,?)}";
+                String newUserId = getNewIdUser();
+                String newPasienId = getNewIdPasien();
+                ps=conn.prepareCall(query);
+                ps.setString(1, model.getEmail());
+                ps.setString(2, model.getId_role());
+                ps.setString(3, model.getUser_id());
+                ps.setBoolean(4, model.isStatus());
+                ps.setString(5, model.getId_pasien());
+                ps.setString(6, model.getNama_pasien());
+                ps.setDate(7, model.getTgl_lahir());
+                ps.setString(8, model.getJenis_kelamin());
+                ps.setString(9, model.getNo_ktp());
+                ps.setString(10, model.getAlamat());
+                ps.setString(11, model.getNo_hp());
+                ps.setString(12, model.getGol_darah());
+                ps.executeUpdate();
+                System.out.println("Data updated!");
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public static void main(String[] args) {
+        long millis=System.currentTimeMillis();  
+        Date date = new Date(millis);
+        
+        PasienDao dao = new PasienDao();
+        PasienModel model = new PasienModel();
+        model.setEmail("pojo@email.com");
+        model.setId_role("R3");
+        model.setUser_id("");
+        model.setPassword(encryptSHA256("pass"));
+        model.setStatus(true);
+        model.setId_pasien("");
+        model.setNama_pasien("Pojo");
+        model.setTgl_lahir(date);
+        model.setJenis_kelamin("L");
+        model.setNo_ktp("098293829");
+        model.setAlamat("Namex");
+        model.setNo_hp("092879323");
+        model.setGol_darah("A");
+        model.setCreated_date(date);
+        model.setCreated_user_id("US0001");
+        dao.save(model, "insert");
+        
+    }
+    
     
 }
