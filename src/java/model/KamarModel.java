@@ -11,7 +11,8 @@ package model;
  */
 public class KamarModel {
     String idKamar, namaRuang,noKamar,kelas,deskripsiKamar,status;
-    double hargaPerhari,kapasitas,terisi;
+    double hargaPerhari;
+    int kapasitas,terisi;
 
     public String getIdKamar() {
         return idKamar;
@@ -69,21 +70,21 @@ public class KamarModel {
         this.hargaPerhari = hargaPerhari;
     }
 
-    public double getKapasitas() {
+    public int getKapasitas() {
         return kapasitas;
     }
 
-    public void setKapasitas(double kapasitas) {
+    public void setKapasitas(int kapasitas) {
         this.kapasitas = kapasitas;
     }
 
-    public double getTerisi() {
+    public int getTerisi() {
         return terisi;
     }
 
-    public void setTerisi(double terisi) {
+    public void setTerisi(int terisi) {
         this.terisi = terisi;
     }
-    
+
     
 }

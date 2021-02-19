@@ -9,6 +9,8 @@ import connection.CliniclyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import model.KamarModel;
+import model.KaryawanModel;
 
 /**
  *
@@ -48,6 +50,37 @@ public class KamarDao {
         
         return newID;
         
+    }
+    
+    public void save(KamarModel model,String page){
+        try{
+            String query = null;
+            String doneMessage = null;
+            if(page.equals("insert")){
+                query="{CALL InsertKamar(?,?,?,?,?,?,?,?,?)}";
+                doneMessage = "Insert success!";
+            }
+            else if(page.equals("update")){
+                query="{CALL InsertKamar(?,?,?,?,?,?,?,?,?)}";
+                doneMessage = "Update success!";
+            }
+            
+            ps=conn.prepareCall(query);
+            ps.setString(1, model.getIdKamar());
+            ps.setString(2, model.getNamaRuang());
+            ps.setString(3, model.getNoKamar());
+            ps.setString(4, model.getKelas());
+            ps.setDouble(5, model.getHargaPerhari());
+            ps.setString(6, model.getDeskripsiKamar());
+            ps.setInt(7, model.getKapasitas());
+            ps.setInt(8, model.getTerisi());
+            ps.setString(9, model.getStatus());
+            ps.executeUpdate();
+            System.out.println(doneMessage);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     public static void main(String[] args) {
