@@ -5,15 +5,16 @@
  */
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
  * @author dinop
  */
 public class DokterModel {
-    String idDokter,namaDokter,idPoli,jenisKelamin,alamat,noHp,noKtp,spesialis,noNpwp,userId,createdUserId;
+    String idDokter,namaDokter,idPoli,jenisKelamin,alamat,noHp,noKtp,spesialis,noNpwp,userId,createdUserId,email,password,id_role,des_role;
     Date tglLahir,waktu;
+    boolean status;
 
     public String getIdDokter() {
         return idDokter;
@@ -103,6 +104,38 @@ public class DokterModel {
         this.createdUserId = createdUserId;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getId_role() {
+        return id_role;
+    }
+
+    public void setId_role(String id_role) {
+        this.id_role = id_role;
+    }
+
+    public String getDes_role() {
+        return des_role;
+    }
+
+    public void setDes_role(String des_role) {
+        this.des_role = des_role;
+    }
+
     public Date getTglLahir() {
         return tglLahir;
     }
@@ -118,6 +151,14 @@ public class DokterModel {
     public void setWaktu(Date waktu) {
         this.waktu = waktu;
     }
-    
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     
 }
