@@ -1,0 +1,90 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dao;
+
+import connection.CliniclyConnection;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import model.LayananModel;
+import model.PendaftaranModel;
+
+/**
+ *
+ * @author dinop
+ */
+public class PendaftaranDao {
+    private final Connection conn;
+    private PreparedStatement ps;
+    private ResultSet rs;
+
+    public PendaftaranDao() {
+        this.conn = CliniclyConnection.connection();
+    }
+    
+    public String getNoAntrian(String idPoli,Date tglDaftar){
+        String newNo = null;
+        try{
+            String lastNo = null;
+            String query="{CALL GetLastNoAntrianPendaftaran(?,?)}";
+            ps=conn.prepareCall(query);
+            ps.setString(1, idPoli);
+            ps.setDate(2, tglDaftar);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                lastNo = rs.getString("no_antrian");
+                int newNumAntrian = Integer.parseInt(lastNo)+1;
+                newNo = String.valueOf(newNumAntrian);
+            }
+            else{
+                newNo = "1";
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return newNo;
+    }
+    
+    public void save(PendaftaranModel model,String page){
+        try{
+            String query = null;
+            String doneMessage = null;
+            if(page.equals("insert")){
+                query="{CALL InsertPendaftaran(?,?,?,?,?,?,?,?)}";
+                doneMessage = "Insert success!";
+            }
+            else if(page.equals("update")){
+                query="{CALL UpdatePendaftaran(?,?,?,?,?,?,?,?)}";
+                doneMessage = "Update success!";
+            }
+            
+            ps=conn.prepareCall(query);
+            ps.setString(1, String.valueOf(model.getId()));
+            ps.setString(2, model.getNoAntrian());
+            ps.setString(3, model.getIdPasien());
+            ps.setString(4, model.getIdPoli());
+            ps.setDate(5, model.getTglDaftar());
+            ps.setString(6, model.getKeterangan());
+            ps.setString(7, model.getUserId());
+            ps.setDate(8, model.getWaktu());
+            ps.executeUpdate();
+            System.out.println(doneMessage);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public static void main(String[] args) {
+        PendaftaranDao dao = new PendaftaranDao();
+        long millis=System.currentTimeMillis();  
+        Date date = new Date(millis);
+        System.out.println(dao.getNoAntrian("01", date));
+    }
+}
