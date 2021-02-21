@@ -6,12 +6,11 @@
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/controller/Login.java</file>
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/model/DetailLayananModel.java</file>
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/model/UserModel.java</file>
-            <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/model/KaryawanModel.java</file>
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/dao/DokterDao.java</file>
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/model/PoliModel.java</file>
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/model/RekamMedikModel.java</file>
+            <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/dao/RoleDao.java</file>
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/model/RawatInapModel.java</file>
-            <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/dao/KaryawanDao.java</file>
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/utils/Encryption.java</file>
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/model/PembelianObatModel.java</file>
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/dao/UserDao.java</file>
@@ -28,8 +27,12 @@
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/model/ObatModel.java</file>
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/model/DokterModel.java</file>
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/model/ResepModel.java</file>
+            <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/dao/KamarDao.java</file>
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/dao/PasienDao.java</file>
             <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/dao/PembelianObatDao.java</file>
+            <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/model/RoleModel.java</file>
+            <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/dao/DetailLayananDao.java</file>
+            <file>file:/C:/Users/dinop/Documents/RPL/Pemrograman%20Berorientasi%20Objek/ClinicLy/ClinicLy/src/java/dao/LayananDao.java</file>
         </group>
     </open-files>
 </project-private>

@@ -10,5 +10,22 @@ package model;
  * @author dinop
  */
 public class LayananModel {
+    String idLayanan,namaLayanan;
+
+    public String getIdLayanan() {
+        return idLayanan;
+    }
+
+    public void setIdLayanan(String idLayanan) {
+        this.idLayanan = idLayanan;
+    }
+
+    public String getNamaLayanan() {
+        return namaLayanan;
+    }
+
+    public void setNamaLayanan(String namaLayanan) {
+        this.namaLayanan = namaLayanan;
+    }
     
 }
