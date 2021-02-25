@@ -51,7 +51,8 @@ public class PendaftaranDao {
         return newNo;
     }
     
-    public void save(PendaftaranModel model,String page){
+    public String save(PendaftaranModel model,String page){
+        String noAntrian = null;
         try{
             String query = null;
             String doneMessage = null;
@@ -75,10 +76,13 @@ public class PendaftaranDao {
             ps.setDate(8, model.getWaktu());
             ps.executeUpdate();
             System.out.println(doneMessage);
+            noAntrian = model.getNoAntrian();
         }
         catch(Exception e){
             e.printStackTrace();
         }
+        
+        return noAntrian;
     }
     
     public static void main(String[] args) {
