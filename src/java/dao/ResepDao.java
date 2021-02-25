@@ -66,10 +66,10 @@ public class ResepDao {
             ps=conn.prepareCall(query);
             ps.setString(1, model.getIdResep());
             ps.setString(2, model.getIdDokter());
-            ps.setDate(2, model.getTglResep());
-            ps.setString(2, model.getIdPoli());
-            ps.setString(2, model.getUserId());
-            ps.setDate(2, model.getWaktu());
+            ps.setDate(3, model.getTglResep());
+            ps.setString(4, model.getIdPoli());
+            ps.setString(5, model.getUserId());
+            ps.setDate(6, model.getWaktu());
             ps.executeUpdate();
             System.out.println(doneMessage);
         }
