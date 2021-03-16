@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import model.LayananModel;
 import model.PendaftaranModel;
 
@@ -49,6 +50,33 @@ public class PendaftaranDao {
         }
         
         return newNo;
+    }
+    
+    public ArrayList<PendaftaranModel> getAllPendaftaran(){
+        ArrayList<PendaftaranModel> list = new ArrayList();
+        try{
+            String query = "{CALL GetAllPendaftaran()}";
+            ps=conn.prepareStatement(query);
+            rs=ps.executeQuery();
+            while(rs.next())
+            {
+                PendaftaranModel model = new PendaftaranModel();
+                model.setId(Integer.parseInt(rs.getString("id")));
+                model.setNoAntrian(rs.getString("no_antrian"));
+                model.setIdPasien(rs.getString("id_pasien"));
+                model.setIdPoli(rs.getString("id_poli"));
+                model.setTglDaftar(rs.getDate("tgl_daftar"));
+                model.setKeterangan(rs.getString("keterangan"));
+                model.setUserId(rs.getString("user_id"));
+                model.setWaktu(rs.getDate("waktu"));
+                list.add(model);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return list;
     }
     
     public String save(PendaftaranModel model,String page){

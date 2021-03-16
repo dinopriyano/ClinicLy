@@ -15,15 +15,35 @@ public class SupplierModel {
     String idSupplier,namaSupplier,alamat,noTelp,email,userrID;
     Date waktu;
 
-    public SupplierModel(String idSupplier, String namaSupplier, String alamat, String noTelp, String email, String userrID, Date waktu) {
+    public void setIdSupplier(String idSupplier) {
         this.idSupplier = idSupplier;
+    }
+
+    public void setNamaSupplier(String namaSupplier) {
         this.namaSupplier = namaSupplier;
+    }
+
+    public void setAlamat(String alamat) {
         this.alamat = alamat;
+    }
+
+    public void setNoTelp(String noTelp) {
         this.noTelp = noTelp;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setUserrID(String userrID) {
         this.userrID = userrID;
+    }
+
+    public void setWaktu(Date waktu) {
         this.waktu = waktu;
     }
+
+    
 
     public String getIdSupplier() {
         return idSupplier;

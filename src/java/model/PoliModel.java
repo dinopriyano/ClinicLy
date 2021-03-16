@@ -12,8 +12,11 @@ package model;
 public class PoliModel {
     String idPoli,namaPoli;
 
-    public PoliModel(String idPoli, String namaPoli) {
+    public void setIdPoli(String idPoli) {
         this.idPoli = idPoli;
+    }
+
+    public void setNamaPoli(String namaPoli) {
         this.namaPoli = namaPoli;
     }
 

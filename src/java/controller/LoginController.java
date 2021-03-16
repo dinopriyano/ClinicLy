@@ -5,6 +5,8 @@
  */
 package controller;
 
+import com.google.gson.Gson;
+import dao.LoginDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -32,17 +34,26 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        String page=request.getParameter("page");
+        PrintWriter out=response.getWriter();
+        LoginDao dao = new LoginDao();
+        Gson g = new Gson();
+        
+        if("login".equals(page))
+        {
+            String email = request.getParameter("email");
+            String pass = request.getParameter("pass");
+            String json = g.toJson(dao.loginUser(email, pass));
+            response.setContentType("text/html;charset=UTF-8");
+            if(json.equals("{}")){
+                out.print("failed");
+            }
+            else{
+                out.print(json);
+            }
+
+            System.out.println(json);
         }
     }
 

@@ -9,6 +9,8 @@ import connection.CliniclyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import model.RoleModel;
 import model.SupplierModel;
 
 /**
@@ -48,6 +50,32 @@ public class SupplierDao {
         }
         
         return newID;
+    }
+    
+    public ArrayList<SupplierModel> getAllSupplier(){
+        ArrayList<SupplierModel> list = new ArrayList();
+        try{
+            String query = "{CALL GetAllSupplier()}";
+            ps=conn.prepareStatement(query);
+            rs=ps.executeQuery();
+            while(rs.next())
+            {
+                SupplierModel model = new SupplierModel();
+                model.setIdSupplier(rs.getString("id_supplier"));
+                model.setNamaSupplier(rs.getString("nama_suplier"));
+                model.setAlamat(rs.getString("alamat"));
+                model.setNoTelp(rs.getString("no_telepon"));
+                model.setEmail(rs.getString("email"));
+                model.setUserrID(rs.getString("user_id"));
+                model.setWaktu(rs.getDate("waktu"));
+                list.add(model);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return list;
     }
     
     public void save(SupplierModel model,String page){

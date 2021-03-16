@@ -9,8 +9,10 @@ import connection.CliniclyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import model.KamarModel;
 import model.KaryawanModel;
+import model.ObatModel;
 
 /**
  *
@@ -50,6 +52,33 @@ public class KamarDao {
         
         return newID;
         
+    }
+    
+    public ArrayList<KamarModel> getAllKamar(){
+        ArrayList<KamarModel> list = new ArrayList();
+        try{
+            String query = "{CALL GetAllKamar()}";
+            ps=conn.prepareStatement(query);
+            rs=ps.executeQuery();
+            while(rs.next())
+            {
+                KamarModel model = new KamarModel();
+                model.setIdKamar(rs.getString("id_kamar"));
+                model.setNamaRuang(rs.getString("nama_ruang"));
+                model.setNoKamar(rs.getString("no_kamar"));
+                model.setKelas(rs.getString("kelas"));
+                model.setHargaPerhari(rs.getDouble("harga_perhari"));
+                model.setDeskripsiKamar(rs.getString("des_kamar"));
+                model.setKapasitas(rs.getInt("kapasitas"));
+                model.setTerisi(rs.getInt("terisi"));
+                model.setStatus(rs.getString("status"));
+                list.add(model);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return list;
     }
     
     public void save(KamarModel model,String page){

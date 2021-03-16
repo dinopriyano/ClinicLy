@@ -135,7 +135,6 @@ public class PasienDao {
     public ArrayList<PasienModel> getAllPasien(){
         ArrayList<PasienModel> arrModel = new ArrayList<PasienModel>();
         try{
-            String lastID = null;
             String query="{CALL GetAllPasien()}";
             ps=conn.prepareCall(query);
             rs=ps.executeQuery();

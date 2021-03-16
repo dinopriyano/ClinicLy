@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import model.KaryawanModel;
 import model.ObatModel;
 
@@ -51,6 +52,32 @@ public class ObatDao {
         
         return newID;
         
+    }
+    
+    public ArrayList<ObatModel> getAllObat(){
+        ArrayList<ObatModel> list = new ArrayList();
+        try{
+            String query = "{CALL GetAllObat()}";
+            ps=conn.prepareStatement(query);
+            rs=ps.executeQuery();
+            while(rs.next())
+            {
+                ObatModel model = new ObatModel();
+                model.setIdObat(rs.getString("id_obat"));
+                model.setNamaObat(rs.getString("nama_obat"));
+                model.setSatuan(rs.getString("satuan"));
+                model.setStok(rs.getDouble("stok"));
+                model.setHargaJual(rs.getDouble("harga_jual"));
+                model.setWaktu(rs.getDate("waktu"));
+                model.setUserId(rs.getString("user_id"));
+                list.add(model);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return list;
     }
     
     public void save(ObatModel model,String page){

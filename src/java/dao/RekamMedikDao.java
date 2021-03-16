@@ -9,6 +9,8 @@ import connection.CliniclyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import model.RekamMedikModel;
 import model.RekamMedikModel;
 
 /**
@@ -48,6 +50,38 @@ public class RekamMedikDao {
         }
         
         return newID;
+    }
+    
+    public ArrayList<RekamMedikModel> getAllRekamMedik(){
+        ArrayList<RekamMedikModel> list = new ArrayList();
+        try{
+            String query = "{CALL GetAllRekamMedik()}";
+            ps=conn.prepareStatement(query);
+            rs=ps.executeQuery();
+            while(rs.next())
+            {
+                RekamMedikModel model = new RekamMedikModel();
+                model.setId(rs.getString("id"));
+                model.setPendaftaran_id(rs.getString("pendaftaran_id"));
+                model.setTensi(rs.getString("tensi"));
+                model.setBerat(Double.parseDouble("berat"));
+                model.setTinggi(Double.parseDouble("tinggi"));
+                model.setKeluhan(rs.getString("keluhan"));
+                model.setTindakan(rs.getString("tindakan"));
+                model.setSaran(rs.getString("saran"));
+                model.setIdDokter(rs.getString("id_dokter"));
+                model.setIdResep(rs.getString("id_resep"));
+                model.setDiagnosa(rs.getString("diagnosa"));
+                model.setWaktu(rs.getDate("waktu"));
+                model.setUserId(rs.getString("user_id"));
+                list.add(model);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return list;
     }
     
     public void save(RekamMedikModel model,String page){

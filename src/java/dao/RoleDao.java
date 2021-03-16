@@ -9,6 +9,7 @@ import connection.CliniclyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import model.KaryawanModel;
 import model.RoleModel;
 
@@ -49,6 +50,27 @@ public class RoleDao {
         }
         
         return newID;
+    }
+    
+    public ArrayList<RoleModel> getAllRole(){
+        ArrayList<RoleModel> list = new ArrayList();
+        try{
+            String query = "{CALL GetAllRole()}";
+            ps=conn.prepareStatement(query);
+            rs=ps.executeQuery();
+            while(rs.next())
+            {
+                RoleModel model = new RoleModel();
+                model.setIdRole(rs.getString("id_role"));
+                model.setDesRole(rs.getString("des_role"));
+                list.add(model);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return list;
     }
     
     public void save(RoleModel model,String page){

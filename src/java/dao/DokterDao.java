@@ -9,8 +9,9 @@ import connection.CliniclyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import model.DokterModel;
-import model.KaryawanModel;
+import model.DokterModel;
 
 /**
  *
@@ -49,6 +50,42 @@ public class DokterDao {
         }
         
         return newID;   
+    }
+    
+    public ArrayList<DokterModel> getAllDokter(){
+        ArrayList<DokterModel> arrModel = new ArrayList<DokterModel>();
+        try{
+            String query="{CALL GetAllDokter()}";
+            ps=conn.prepareCall(query);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                DokterModel model = new DokterModel();
+                model.setIdDokter(rs.getString("id_dokter"));
+                model.setNamaDokter(rs.getString("nama_dokter"));
+                model.setTglLahir(rs.getDate("tgl_lahir"));
+                model.setJenisKelamin(rs.getString("jenis_kelamin"));
+                model.setNoKtp(rs.getString("no_ktp"));
+                model.setNoNpwp(rs.getString("no_npwp"));
+                model.setAlamat(rs.getString("alamat"));
+                model.setNoHp(rs.getString("no_hp"));
+                model.setIdPoli(rs.getString("id_poli"));
+                model.setUserId(rs.getString("user_id"));
+                model.setCreatedUserId(rs.getString("created_user_id"));
+                model.setSpesialis(rs.getString("spesialis"));
+                model.setWaktu(rs.getDate("waktu"));
+                model.setEmail(rs.getString("email"));
+                model.setPassword(rs.getString("password"));
+                model.setId_role(rs.getString("id_role"));
+                model.setStatus(rs.getBoolean("status"));
+                model.setDes_role(rs.getString("des_role"));
+                arrModel.add(model);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return arrModel;
     }
     
     public void save(DokterModel model,String page){
